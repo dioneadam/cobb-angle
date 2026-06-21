@@ -1,4 +1,4 @@
-# Spinal Cobb AI
+# Cobb Angle
 
 Detecção automática de vértebras em radiografias da coluna e estimativa do ângulo de Cobb via Deep Learning.
 
