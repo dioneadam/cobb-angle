@@ -57,8 +57,8 @@ spinal_cobb_ai/
 ## Instalação
 
 ```bash
-git clone https://github.com/seu-usuario/spinal-cobb.git
-cd spinal-cobb
+git clone https://github.com/dioneadam/cobb-angle.git
+cd cobb-angle
 pip install -r requirements.txt
 ```
 
