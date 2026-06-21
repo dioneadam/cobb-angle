@@ -1,0 +1,71 @@
+# ============================================================
+#  Arquivo de Configuração Central
+# ============================================================
+
+# --- Dados de Treinamento ---
+data:
+  json_path: "data/Spinal-AI2024_train_annotation.json"
+  images_root: "data/Spinal-AI2024-dataset"
+  cobb_gt_path: "data/Spinal-AI2024_Cobb_train_gt.txt"
+  subset_name: "Spinal-AI2024-subset1"
+  image_width: 512
+  image_height: 1024
+  crop_start_x: 64
+  crop_end_x: 448
+  min_vertebrae: 15
+
+# --- Dados de Teste ---
+test:
+  json_path: "data/Spinal-AI2024_test_annotation.json"
+  images_root: "data/Spinal-AI2024-dataset"
+  cobb_gt_path: "data/Spinal-AI2024_Cobb_test_gt.txt" 
+  subset_name: "Spinal-AI2024-subset5"
+
+# --- Modelo ---
+model:
+  backbone: "hrnet_w32"
+  pretrained: true
+  num_keypoints: 136       # 17 vértebras × 8 coordenadas
+  num_vertebrae: 17
+
+# --- Treinamento ---
+training:
+  epochs: 150
+  batch_size: 8
+  learning_rate: 0.0001
+  num_workers: 2
+  random_seed: 42
+  k_folds: 5
+  early_stopping_patience: 15
+  beta_smooth: 1.0          # SmoothL1 beta
+
+# --- Pesos da Loss Híbrida ---
+loss:
+  w_reg: 1.0                # Regressão de Keypoints (SmoothL1)
+  w_seg: 0.65               # Segmentação (Dice)
+  w_pca: 0.02               # Regularização Anatômica (PCA)
+
+# --- PCA ---
+pca:
+  variance_threshold: 0.95
+  model_path: "checkpoints/spine_pca_model.pkl"
+
+# --- Checkpoints ---
+checkpoints:
+  dir: "checkpoints"
+  best_global: "best_global_model.pth"
+
+# --- Resultados ---
+results:
+  dir: "results"
+  metrics_csv_prefix: "metrics_fold"
+
+# --- Google Drive ---
+drive:
+  enabled: false
+  checkpoint_folder_id: ""
+  json_file_id: ""
+  json_test_file_id: ""
+  zip_file_id: ""
+  cobb_gt_train_file_id: ""
+  cobb_gt_test_file_id: ""
